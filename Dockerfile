@@ -3,7 +3,7 @@ FROM golang:1.21-alpine3.18 as builder
 WORKDIR /app
 COPY . .
 RUN go mod tidy
-RUN  go build -o main main.go
+RUN  go build -o builder main.go
 
 
 #second stage
