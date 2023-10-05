@@ -14,7 +14,20 @@ type Person struct {
 func main() {
 	app := fiber.New()
 
+	//middleware
+	app.Use(func(c *fiber.Ctx) error {
+		//pass param to route
+		c.Locals("name", "nutx")
+
+		fmt.Printf("before")
+		c.Next()
+		fmt.Printf("after")
+		return nil
+	})
+
 	app.Get("/", func(c *fiber.Ctx) error {
+		name := c.Locals("name")
+		fmt.Print("server up", name)
 		return c.SendString("server up")
 	})
 
